@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@id/firstFragment"
+        android:title="firstFragment"
+        android:icon="@android:drawable/btn_star_big_on"></item>
+    <item android:id="@id/secondFragment"
+        android:title="Hotel"
+        android:icon="@drawable/hotel_u" />
+    <item android:id="@id/thirdFragment"
+        android:title="Map"
+        android:icon="@drawable/ic_loc_in_map_u" />
+</menu>
