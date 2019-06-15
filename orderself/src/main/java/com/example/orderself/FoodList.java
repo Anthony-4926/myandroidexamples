@@ -54,4 +54,10 @@ public class FoodList extends Fragment {
         adapter = new FoodListAdapter(FoodDatabase.getFoods(),getContext());
         recyclerView.setAdapter(adapter);
     }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        adapter.notifyDataSetChanged();
+    }
 }

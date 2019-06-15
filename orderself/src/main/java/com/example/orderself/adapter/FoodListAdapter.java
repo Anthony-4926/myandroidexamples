@@ -28,7 +28,7 @@ import java.util.List;
  * @create 2019-06-14 9:06
  */
 public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyHolder>{
-    private List<Food> foodList;
+    private static List<Food> foodList;
     private Context context;
 
     public FoodListAdapter(List<Food> foodList, Context context) {
@@ -109,4 +109,12 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyHold
         }
     }
 
+    /**
+     * 修改食物数量
+     * @param id
+     * @param amount
+     */
+    public static void fixFoodAmount(int id, int amount){
+        foodList.get(id).setAmount(amount);
+    }
 }

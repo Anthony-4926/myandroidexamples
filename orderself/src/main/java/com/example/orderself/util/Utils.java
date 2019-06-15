@@ -5,13 +5,13 @@ package com.example.orderself.util;
  * @create 2019-06-14 9:22
  */
 public class Utils {
-    private int nowOrderId;
+    private static int nowOrderId;
 
-    public int getNowOrderId() {
+    public static int getNowOrderId() {
         return nowOrderId;
     }
 
-    public void setNowOrderId(int nowOrderId) {
-        this.nowOrderId = nowOrderId;
+    public static void setNowOrderId(int id) {
+        nowOrderId = id;
     }
 }

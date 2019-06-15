@@ -13,7 +13,6 @@ import java.util.List;
 public class FoodDatabase {
     protected static List<Food> Foods=initFoods();
 
-
     /**
      * 获取所有食物
      * @return所有食物
