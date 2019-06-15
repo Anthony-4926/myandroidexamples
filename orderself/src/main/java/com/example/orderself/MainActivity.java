@@ -11,6 +11,8 @@ import androidx.navigation.ui.NavigationUI;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.orderself.database.FoodDatabase;
+import com.example.orderself.util.Utils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavController.OnDestinationChangedListener {
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
         // 监听导航切换事件
         controller.addOnDestinationChangedListener(this);
         NavigationUI.setupWithNavController(bottomNavigationView, controller);
+        Utils.setFoodList(FoodDatabase.getFoods());
     }
 
     @Override

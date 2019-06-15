@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 
 import com.example.orderself.adapter.FoodListAdapter;
 import com.example.orderself.database.FoodDatabase;
+import com.example.orderself.util.Utils;
 
 
 /**
@@ -51,7 +52,7 @@ public class FoodList extends Fragment {
         recyclerView.setItemAnimator(itemAnimator);
 //        添加recyclerViewItem分割线
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
-        adapter = new FoodListAdapter(FoodDatabase.getFoods(),getContext());
+        adapter = new FoodListAdapter(getContext());
         recyclerView.setAdapter(adapter);
     }
 

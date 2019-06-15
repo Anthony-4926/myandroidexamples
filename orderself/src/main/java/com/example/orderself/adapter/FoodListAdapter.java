@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.orderself.FoodDetail;
 import com.example.orderself.R;
 import com.example.orderself.entity.Food;
+import com.example.orderself.util.Utils;
 
 
 import java.util.List;
@@ -28,11 +29,9 @@ import java.util.List;
  * @create 2019-06-14 9:06
  */
 public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyHolder>{
-    private static List<Food> foodList;
     private Context context;
 
-    public FoodListAdapter(List<Food> foodList, Context context) {
-        this.foodList = foodList;
+    public FoodListAdapter(Context context) {
         this.context = context;
     }
 
@@ -46,32 +45,32 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyHold
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-        holder.img.setImageResource(foodList.get(position).getImg());
-        holder.name.setText(foodList.get(position).getName());
-        holder.amount.setText(""+foodList.get(position).getAmount());
-        Log.d("",""+foodList.get(position).getDiscount());
-        if(foodList.get(position).getDiscount()<10.0){
-            holder.discount.setText(String.valueOf(foodList.get(position).getDiscount())+"折");
+        holder.img.setImageResource(Utils.getFoodList().get(position).getImg());
+        holder.name.setText(Utils.getFoodList().get(position).getName());
+        holder.amount.setText(""+Utils.getFoodList().get(position).getAmount());
+        Log.d("",""+Utils.getFoodList().get(position).getDiscount());
+        if(Utils.getFoodList().get(position).getDiscount()<10.0){
+            holder.discount.setText(String.valueOf(Utils.getFoodList().get(position).getDiscount())+"折");
         }
 
-        holder.price.setText("￥"+foodList.get(position).getPrice());
-        holder.realPrice.setText("￥"+(foodList.get(position).getPrice() * foodList.get(position).getDiscount()/10.0));
+        holder.price.setText("￥"+Utils.getFoodList().get(position).getPrice());
+        holder.realPrice.setText("￥"+(Utils.getFoodList().get(position).getPrice() * Utils.getFoodList().get(position).getDiscount()/10.0));
         holder.price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         holder.minFood.setOnClickListener(v->{
-            if(foodList.get(position).getAmount()!=0){
-                foodList.get(position).setAmount(foodList.get(position).getAmount()-1);
+            if(Utils.getFoodList().get(position).getAmount()!=0){
+                Utils.getFoodList().get(position).setAmount(Utils.getFoodList().get(position).getAmount()-1);
             }
             notifyDataSetChanged();
         });
         holder.addFood.setOnClickListener(v->{
-            foodList.get(position).setAmount(foodList.get(position).getAmount()+1);
+            Utils.getFoodList().get(position).setAmount(Utils.getFoodList().get(position).getAmount()+1);
             notifyDataSetChanged();
         });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("food",foodList.get(position));
+                bundle.putSerializable("food",Utils.getFoodList().get(position));
                 Navigation.findNavController(v).navigate(R.id.action_foodList_to_foodDetail,bundle);
 //                Toast.makeText(context, foodList.get(position).getName(), Toast.LENGTH_SHORT).show();
             }
@@ -80,7 +79,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyHold
 
     @Override
     public int getItemCount() {
-        return foodList.size();
+        return Utils.getFoodList().size();
     }
 
     /**
@@ -115,6 +114,6 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyHold
      * @param amount
      */
     public static void fixFoodAmount(int id, int amount){
-        foodList.get(id).setAmount(amount);
+        Utils.getFoodList().get(id).setAmount(amount);
     }
 }
