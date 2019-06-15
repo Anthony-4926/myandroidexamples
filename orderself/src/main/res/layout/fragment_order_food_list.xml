@@ -3,26 +3,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:layout_margin="5dp"
     tools:context=".OrderFoodList">
+
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/ordere_food_list_name"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="锅包肉"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:text=""
+            />
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/ordere_food_list_amount"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="1"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:text=""
+           />
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/ordere_food_list_price"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="15"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:text=""
+            />
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/ordere_food_list_state"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="已上"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:text=""
+             />
 </TableRow>

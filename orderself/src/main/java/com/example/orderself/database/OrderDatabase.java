@@ -16,6 +16,9 @@ public class OrderDatabase {
         orderList.add(order);
     }
     public static Order getOrderById(int id){
-        return orderList.get(id);
+        if (orderList.size()!=0){
+            return orderList.get(id);
+        }
+        return null;
     }
 }
