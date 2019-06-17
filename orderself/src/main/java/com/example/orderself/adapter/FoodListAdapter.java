@@ -3,6 +3,7 @@ package com.example.orderself.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,11 +14,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderself.FoodDetail;
 import com.example.orderself.R;
+import com.example.orderself.database.OrderDatabase;
 import com.example.orderself.entity.Food;
 import com.example.orderself.util.Utils;
 
@@ -30,9 +33,11 @@ import java.util.List;
  */
 public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyHolder>{
     private Context context;
+    private static List<Food> foodList;
 
-    public FoodListAdapter(Context context) {
+    public FoodListAdapter(Context context, List<Food> foodList) {
         this.context = context;
+        this.foodList = foodList;
     }
 
     @NonNull
@@ -45,25 +50,39 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyHold
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-        holder.img.setImageResource(Utils.getFoodList().get(position).getImg());
-        holder.name.setText(Utils.getFoodList().get(position).getName());
-        holder.amount.setText(""+Utils.getFoodList().get(position).getAmount());
-        Log.d("",""+Utils.getFoodList().get(position).getDiscount());
-        if(Utils.getFoodList().get(position).getDiscount()<10.0){
+        holder.img.setImageResource(foodList.get(position).getImg());
+        holder.name.setText(foodList.get(position).getName());
+        holder.amount.setText(""+foodList.get(position).getAmount());
+        if(foodList.get(position).getDiscount()<10.0){
             holder.discount.setText(String.valueOf(Utils.getFoodList().get(position).getDiscount())+"折");
         }
-
-        holder.price.setText("￥"+Utils.getFoodList().get(position).getPrice());
-        holder.realPrice.setText("￥"+(Utils.getFoodList().get(position).getPrice() * Utils.getFoodList().get(position).getDiscount()/10.0));
+        holder.price.setText("￥"+foodList.get(position).getPrice());
+        holder.realPrice.setText("￥"+(foodList.get(position).getPrice() * Utils.getFoodList().get(position).getDiscount()/10.0));
         holder.price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+
         holder.minFood.setOnClickListener(v->{
-            if(Utils.getFoodList().get(position).getAmount()!=0){
-                Utils.getFoodList().get(position).setAmount(Utils.getFoodList().get(position).getAmount()-1);
+            if(foodList.get(position).getAmount()!=0){
+                foodList.get(position).setAmount(foodList.get(position).getAmount()-1);
+            }
+            for (Food food : OrderDatabase.getOrderById(Utils.getNowOrderId()).getFoods()) {
+                if(food.getAmount()==0){
+                    OrderDatabase.getOrderById(Utils.getNowOrderId()).getFoods().remove(food);
+                }
             }
             notifyDataSetChanged();
         });
+//        添加食物监听
         holder.addFood.setOnClickListener(v->{
-            Utils.getFoodList().get(position).setAmount(Utils.getFoodList().get(position).getAmount()+1);
+            foodList.get(position).setAmount(foodList.get(position).getAmount()+1);
+            boolean isExit = false;
+            for (Food food : OrderDatabase.getOrderById(Utils.getNowOrderId()).getFoods()) {
+                if(food.getId()==foodList.get(position).getId()){
+                    isExit=true;
+                }
+            }
+            if(isExit==false){
+                OrderDatabase.getOrderById(Utils.getNowOrderId()).getFoods().add(foodList.get(position));
+            }
             notifyDataSetChanged();
         });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -114,6 +133,18 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyHold
      * @param amount
      */
     public static void fixFoodAmount(int id, int amount){
+        foodList.get(findFoodById(id)).setAmount(amount);
         Utils.getFoodList().get(id).setAmount(amount);
+    }
+
+    public static int findFoodById(int id){
+        int result=0;
+       for(int i=0; i<foodList.size(); i++){
+           if(id == foodList.get(i).getId()){
+               result = i;
+               break;
+           }
+       }
+       return result;
     }
 }

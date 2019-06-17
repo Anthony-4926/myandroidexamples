@@ -14,13 +14,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.orderself.adapter.FoodListAdapter;
 import com.example.orderself.adapter.OrderFoodListAdapter;
 import com.example.orderself.database.FoodDatabase;
 import com.example.orderself.database.OrderDatabase;
+import com.example.orderself.entity.Food;
 import com.example.orderself.entity.Order;
 import com.example.orderself.util.Utils;
+
+import java.net.SocketTimeoutException;
 
 
 /**
@@ -30,6 +34,7 @@ public class OrderList extends Fragment {
     private Order order;
     private RecyclerView recyclerView;
     private OrderFoodListAdapter adapter;
+    double totalPrice;
     public OrderList() {
         // Required empty public constructor
     }
@@ -45,18 +50,20 @@ public class OrderList extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         order = OrderDatabase.getOrderById(Utils.getNowOrderId());
-        recyclerView = getActivity().findViewById(R.id.recyclerview_foods);
+        ((TextView)getActivity().findViewById(R.id.order_list_postion)).setText(""+(OrderDatabase.getOrderById(Utils.getNowOrderId()).getPosition().getId()+1));
+        recyclerView = getActivity().findViewById(R.id.recyclerview_order_foods);
 //        创建布局管理器
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-//        添加动画
-
-        RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
-        recyclerView.setItemAnimator(itemAnimator);
-//        添加recyclerViewItem分割线
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
         adapter = new OrderFoodListAdapter(order.getFoods(), getContext());
         recyclerView.setAdapter(adapter);
+
+        totalPrice=0;
+        for (Food f : OrderDatabase.getOrderById(Utils.getNowOrderId()).getFoods()) {
+            totalPrice+=(f.getPrice()*f.getAmount()*f.getDiscount()/10);
+        }
+        ((TextView) getActivity().findViewById(R.id.total_price)).setText(""+totalPrice);
 
     }
 
@@ -64,6 +71,7 @@ public class OrderList extends Fragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         order=OrderDatabase.getOrderById(Utils.getNowOrderId());
+        adapter.setFoodList(order.getFoods());
         adapter.notifyDataSetChanged();
     }
 

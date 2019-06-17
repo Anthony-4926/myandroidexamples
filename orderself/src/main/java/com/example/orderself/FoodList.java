@@ -52,7 +52,7 @@ public class FoodList extends Fragment {
         recyclerView.setItemAnimator(itemAnimator);
 //        添加recyclerViewItem分割线
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
-        adapter = new FoodListAdapter(getContext());
+        adapter = new FoodListAdapter(getContext(),Utils.getFoodList());
         recyclerView.setAdapter(adapter);
     }
 

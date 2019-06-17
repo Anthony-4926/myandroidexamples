@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     android:orientation="vertical"
+    android:background="@drawable/backimg"
     tools:context=".OrderList">
 
     <ScrollView
@@ -23,17 +25,23 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="桌号：" />
+                    android:text="桌号："
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/order_list_postion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
                     android:text="2" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
                     android:text="号桌" />
             </LinearLayout>
 
@@ -50,6 +58,8 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
                         android:text="菜品"
                         android:textAlignment="center" />
 
@@ -57,27 +67,51 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
                         android:text="数量" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
                         android:text="价格" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
                         android:text="状态"
                         android:textAlignment="center" />
                 </TableRow>
 
-                <fragment
-                    android:id="@+id/order_food_list_fragment"
-                    android:name="com.example.orderself.OrderFoodList"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview_order_foods"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></fragment>
+                    android:layout_height="match_parent" />
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:text="总价："/>
+                    <TextView
+                        android:id="@+id/total_price"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:text="0"/>
+                </TableRow>
+
             </TableLayout>
+
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -1,10 +1,13 @@
 package com.example.orderself.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderself.R;
 import com.example.orderself.entity.Food;
+import com.example.orderself.util.Utils;
 
 import java.util.List;
 
@@ -21,10 +25,11 @@ public class OrderFoodListAdapter extends RecyclerView.Adapter<OrderFoodListAdap
 
     public OrderFoodListAdapter(List<Food> foodList, Context context) {
         this.foodList = foodList;
+        Log.d("OrderFoodListAdapter",""+foodList.size());
         this.context = context;
     }
 
-    public static void setFoodList(List<Food> newFoodList) {
+    public void setFoodList(List<Food> newFoodList) {
         foodList = newFoodList;
     }
 
@@ -39,9 +44,18 @@ public class OrderFoodListAdapter extends RecyclerView.Adapter<OrderFoodListAdap
     @Override
     public void onBindViewHolder(@NonNull MyHolder2 holder, int position) {
         holder.name.setText(foodList.get(position).getName());
-        holder.amount.setText(foodList.get(position).getAmount());
-        holder.price.setText("" + foodList.get(position).getPrice());
-        holder.state.setText(foodList.get(position).getState());
+        holder.amount.setText(""+foodList.get(position).getAmount());
+        holder.price.setText("" + foodList.get(position).getPrice()* foodList.get(position).getDiscount()/10.0);
+        if ("待做".equals(foodList.get(position).getState())){
+
+            LinearLayout state = (android.widget.LinearLayout)LayoutInflater.from(context)
+                    .inflate(R.layout.button_item, holder.state, false);
+            holder.state.addView(state);
+        }else{
+            TextView complished = new TextView(context);
+            complished.setText("已做");
+            holder.state.addView(complished);
+        }
     }
 
     @Override
@@ -53,7 +67,7 @@ public class OrderFoodListAdapter extends RecyclerView.Adapter<OrderFoodListAdap
         public TextView name;
         public TextView amount;
         public TextView price;
-        public TextView state;
+        public LinearLayout state;
         public MyHolder2(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.ordere_food_list_name);

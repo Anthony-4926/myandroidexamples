@@ -12,13 +12,16 @@ import java.util.List;
  */
 public class OrderDatabase {
     protected static List<Order> orderList = new ArrayList<>();
-    public void insterOder(Order order){
-        orderList.add(order);
-    }
     public static Order getOrderById(int id){
         if (orderList.size()!=0){
             return orderList.get(id);
         }
         return null;
+    }
+    public static int getOrderListSize(){
+        return orderList.size();
+    }
+    public static void insertOrder(Order order){
+        orderList.add(order);
     }
 }

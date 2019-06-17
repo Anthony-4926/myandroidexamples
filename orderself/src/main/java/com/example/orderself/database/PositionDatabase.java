@@ -12,16 +12,22 @@ import java.util.List;
  * @create 2019-06-14 9:45
  */
 public class PositionDatabase {
-    protected List<Position> positions = initPositions();
+    protected static List<Position> positions = initPositions();
 
 
-    public List<Position> getPositions() {
+    public static List<Position> getPositions() {
         return positions;
     }
 
-    protected static List<Position> initPositions(){
+
+    protected static List<Position> initPositions() {
         List<Position> positions = new ArrayList<>();
-        positions.add(new Position(positions.size(),"可用"));
+        for (int i = 0; i < 20; i++) {
+            positions.add(new Position());
+            positions.get(i).setState("可用");
+            positions.get(i).setId(i);
+        }
+        positions.get(3).setState("不可用");
         return positions;
     }
 

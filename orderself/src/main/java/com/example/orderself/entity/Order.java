@@ -1,6 +1,7 @@
 package com.example.orderself.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,12 +11,13 @@ import java.util.List;
 public class Order {
     private int id;
     private Waiter waiter;
-    private List<Food> foods;
+    private List<Food> foods = new ArrayList<>();
     private LocalDateTime insterTime;
     private LocalDateTime overTime;
     private Position position;
 
-    public Order() {
+    public Order(int id) {
+        this.id=id;
     }
 
     public int getId() {

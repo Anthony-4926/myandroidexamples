@@ -30,6 +30,7 @@ public class Food implements Serializable {
     }
 
     public Food() {
+        this.state="可用";
     }
 
     public double getPrice() {
