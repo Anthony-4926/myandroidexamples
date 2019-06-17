@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:orientation="vertical"
     android:background="@drawable/backimg"
+    android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".OrderList">
 
     <ScrollView
@@ -33,16 +33,16 @@
                     android:id="@+id/order_list_postion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="2"
                     android:textSize="18dp"
-                    android:textStyle="bold"
-                    android:text="2" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="号桌"
                     android:textSize="18dp"
-                    android:textStyle="bold"
-                    android:text="号桌" />
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <!--清单-->
@@ -58,34 +58,34 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
                         android:text="菜品"
-                        android:textAlignment="center" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
                         android:textAlignment="center"
                         android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:text="数量" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:text="数量"
                         android:textAlignment="center"
                         android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:text="价格" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:text="价格"
+                        android:textAlignment="center"
                         android:textSize="18dp"
-                        android:textStyle="bold"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:text="状态"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
                 </TableRow>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -93,21 +93,41 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
-                <TableRow>
+                <LinearLayout>
+
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="总价："
                         android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:text="总价："/>
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/total_price"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="0"
                         android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:text="0"/>
-                </TableRow>
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/pay"
+                        android:layout_width="60dp"
+                        android:layout_height="30dp"
+                        android:background="#FD4002"
+                        android:text="结算"
+                        android:textColor="#fff"
+                        android:textSize="18dp">
+
+                    </Button>
+                </LinearLayout>
 
             </TableLayout>
 

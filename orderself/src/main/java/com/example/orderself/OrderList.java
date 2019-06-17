@@ -1,6 +1,7 @@
 package com.example.orderself;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,7 +25,7 @@ import com.example.orderself.database.OrderDatabase;
 import com.example.orderself.entity.Food;
 import com.example.orderself.entity.Order;
 import com.example.orderself.util.Utils;
-
+import com.example.orderself.Pay;
 import java.net.SocketTimeoutException;
 
 
@@ -64,6 +66,10 @@ public class OrderList extends Fragment {
             totalPrice+=(f.getPrice()*f.getAmount()*f.getDiscount()/10);
         }
         ((TextView) getActivity().findViewById(R.id.total_price)).setText(""+totalPrice);
+        ((Button)getActivity().findViewById(R.id.pay)).setOnClickListener(v->{
+            Intent intent = new Intent(getActivity(),Pay.class);
+            startActivity(intent);
+        });
 
     }
 

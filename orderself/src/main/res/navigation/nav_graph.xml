@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/foodList">
+    app:startDestination="@id/kind_of_food">
     <fragment
         android:id="@+id/foodList"
         android:name="com.example.orderself.FoodList"
@@ -24,8 +24,8 @@
         android:label="fragment_food_detail"
         tools:layout="@layout/fragment_food_detail" />
     <fragment
-        android:id="@+id/order_food_list"
-        android:name="com.example.orderself.order_food_list"
-        android:label="fragment_order_food_list"
-        tools:layout="@layout/fragment_order_food_list" />
+        android:id="@+id/kind_of_food"
+        android:name="com.example.orderself.KindOfFood"
+        android:label="fragment_kind_of_food"
+        tools:layout="@layout/fragment_kind_of_food" />
 </navigation>
